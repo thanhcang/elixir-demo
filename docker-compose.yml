@@ -1,14 +1,21 @@
-ersion: "3.7"
+version: '3.7'
+
 services:
   app:
     image: nicbet/phoenix:1.6.15-alpine
     build: .
     ports:
-      - "4000:4000"
+      - 4000:4000
     volumes:
-      - ./app:/app
+      - ./:/app
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-    # depends_on:
+         # Variables to connect to our Postgres server.
+     depends_on:
+         # The DB container needs to be started before we start this container.
+
+    networks:
+      - local
+
+networks: 
+  local:
+    name: 'elixir-local'      
